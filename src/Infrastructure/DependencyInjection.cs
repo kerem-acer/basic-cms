@@ -1,5 +1,6 @@
 using Application.Interfaces;
 using Application.Interfaces.Persistence.Main;
+using Infrastructure.Constants;
 using Infrastructure.Persistence.Main;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ namespace Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlServer(configuration[PersistenceConfiguration.Main.ConnectionString]));
 
             services.AddScoped(typeof(IMainAsyncRepository<>), typeof(MainAsyncRepository<>));
 
