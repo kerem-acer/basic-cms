@@ -1,5 +1,5 @@
-# basic-cms
-Basic CMS project with clean architecture based on [this repo](https://github.com/jasontaylordev/CleanArchitecture)
+# .Net Core Basic CMS Project
+Basic CMS project based on [this repo](https://github.com/jasontaylordev/CleanArchitecture)
 
 ## How To Run?
 
