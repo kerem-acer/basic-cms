@@ -17,4 +17,4 @@ Add mssql server connection string to appsettings.json
 }
 ```
 
-Run `dotnet run src/WebApi/WebApi.csproj`
+Run `dotnet run --project src/WebApi/WebApi.csproj`
