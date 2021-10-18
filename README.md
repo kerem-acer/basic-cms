@@ -2,6 +2,12 @@
 Basic CMS project based on [this repo](https://github.com/jasontaylordev/CleanArchitecture)
 
 ## How To Run?
+First clone repository.
+
+Run `git clone https://github.com/kerem-acer/basic-cms.git`
+
+then run `cd basic-cms`
+
 
 ### Docker
 Run `docker-compose up --build`
