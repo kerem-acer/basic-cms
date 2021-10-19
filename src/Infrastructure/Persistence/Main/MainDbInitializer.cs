@@ -7,18 +7,16 @@ namespace Infrastructure.Persistence.Main
 {
     public static class MainDbInitializer
     {
-        public static async Task InitializeDbAsync(IServiceProvider services)
+        public static async Task InitializeDbAsync(ApplicationDbContext db)
         {
-            var context = services.GetRequiredService<ApplicationDbContext>();
-
-            await MigrateDb(context);
+            await MigrateDb(db);
         }
 
-        private static async Task MigrateDb(ApplicationDbContext context) 
+        private static async Task MigrateDb(ApplicationDbContext db) 
         {
-            if (context.Database.IsSqlServer())
+            if (db.Database.IsSqlServer())
             {
-                await context.Database.MigrateAsync();
+                await db.Database.MigrateAsync();
             }
         }
     }

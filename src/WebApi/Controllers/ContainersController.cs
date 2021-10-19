@@ -4,28 +4,29 @@ using Application.Modules.Containers.Commands.Remove;
 using Application.Modules.Containers.Commands.Update;
 using Application.Modules.Containers.Queries;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Constants;
 
 namespace WebApi.Controllers
 {
     public class ContainersController : ApiControllerBase
     {
-        [HttpGet("{id:int}")]
+        [HttpGet(ApiRoutes.Containers.GetById)]
         public async Task<IActionResult> Get(int id) =>
             Ok(await Mediator.Send(new GetContainerByIdQuery(id)));
 
-        [HttpGet]
+        [HttpGet(ApiRoutes.Containers.GetAll)]
         public async Task<IActionResult> Get() =>
             Ok(await Mediator.Send(new GetAllContainersQuery()));
 
-        [HttpPost]
+        [HttpPost(ApiRoutes.Containers.Create)]
         public async Task<IActionResult> Post(CreateContainerCommand command)
         {
-            var containerId = await Mediator.Send(command);
+            var container = await Mediator.Send(command);
 
-            return CreatedAtAction(nameof(Get), new { id = containerId }, command);
+            return CreatedAtAction(nameof(Get), new { id = container.Id }, container);
         }
 
-        [HttpPut("{id:int}")]
+        [HttpPut(ApiRoutes.Containers.Update)]
         public async Task<IActionResult> Put(int id, UpdateContainerCommand command)
         {
             if (id != command.Id)
@@ -38,7 +39,7 @@ namespace WebApi.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete(ApiRoutes.Containers.DeleteById)]
         public async Task<ActionResult> Delete(int id)
         {
             await Mediator.Send(new RemoveContainerCommand(id));

@@ -13,8 +13,11 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            if (configuration[PersistenceConfiguration.Main.ConnectionString] is not null)
+            {
+                services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(configuration[PersistenceConfiguration.Main.ConnectionString]));
+            }
 
             services.AddScoped(typeof(IMainAsyncRepository<>), typeof(MainAsyncRepository<>));
 

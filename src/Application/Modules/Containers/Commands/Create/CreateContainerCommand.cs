@@ -1,13 +1,14 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Interfaces.Persistence.Main;
+using Application.Modules.Containers.Models;
 using Domain.Entities;
 using Mapster;
 using MediatR;
 
 namespace Application.Modules.Containers.Commands.Create
 {
-    public class CreateContainerCommand : IRequest<int>
+    public class CreateContainerCommand : IRequest<ContainerDto>
     {
         public string Name { get; set; }
 
@@ -16,7 +17,7 @@ namespace Application.Modules.Containers.Commands.Create
         public int PageId { get; set; }
     }
 
-    public class CreateContainerCommandHandler : IRequestHandler<CreateContainerCommand, int>
+    public class CreateContainerCommandHandler : IRequestHandler<CreateContainerCommand, ContainerDto>
     {
         private readonly IMainAsyncRepository<Container> _repository;
 
@@ -25,7 +26,7 @@ namespace Application.Modules.Containers.Commands.Create
             _repository = repository;
         }
 
-        public async Task<int> Handle(CreateContainerCommand request, CancellationToken cancellationToken)
+        public async Task<ContainerDto> Handle(CreateContainerCommand request, CancellationToken cancellationToken)
         {
             Container container = new() 
             {
@@ -37,7 +38,7 @@ namespace Application.Modules.Containers.Commands.Create
             await _repository.AddAsync(container, cancellationToken);
             await _repository.SaveAsync(cancellationToken);
 
-            return container.Id;
+            return container.Adapt<ContainerDto>();
         }
     }
 }
