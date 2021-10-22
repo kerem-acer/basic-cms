@@ -8,5 +8,8 @@ services:
       dockerfile: src/WebApi/Dockerfile
     depends_on:
       - db
+      - redis
   db:
     image: mcr.microsoft.com/mssql/server
+  redis:
+    image: redis

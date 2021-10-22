@@ -6,6 +6,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - MainDb__ConnectionString=Server=db; Database=BasicCmsDb; User=sa; Password=Change_me123!; MultipleActiveResultSets=true;
+      - RedisConnection=redis
     volumes:
       - ~/.aspnet/https:/https:ro
     ports:
@@ -21,6 +22,13 @@ services:
     environment:
       - "SA_PASSWORD=Change_me123!"
       - "ACCEPT_EULA=Y"
+  
+  redis:
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
 
 volumes:
   db-data:
+  redis-data:
