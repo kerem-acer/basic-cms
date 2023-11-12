@@ -12,6 +12,10 @@ namespace Domain.Entities
 
         public int PageId { get; set; }
 
+        /// <summary>
+        /// Page of the container
+        /// </summary>
+        /// <value></value>
         public Page Page { get; set; }
     }
 }
