@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cmsapi
+  labels:
+    app: basic-cms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: cmsapi
+  template:
+    metadata:
+      labels:
+        app: basic-cms
+        service: cmsapi
+    spec:
+      containers:
+        - name: cmsapi
+          image: 50777750/basic-cms
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          env:
+              - name: ASPNETCORE_URLS
+                value: http://+:80
