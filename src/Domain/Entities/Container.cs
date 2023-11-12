@@ -10,6 +10,10 @@ namespace Domain.Entities
 
         public string Content { get; set; }
 
+/// <summary>
+/// SAVE THE PAGE ID
+/// </summary>
+/// <value></value>
         public int PageId { get; set; }
 
         public Page Page { get; set; }
